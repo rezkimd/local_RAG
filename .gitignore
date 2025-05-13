@@ -162,3 +162,64 @@ cython_debug/
 # Big File
 information_file/
 simple-local-rag-main/
+not_use_code.ipynb
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+*.log
+
+# Virtual environments
+env/
+venv/
+ENV/
+*.env
+*.venv
+.venv/
+
+# VSCode, PyCharm, dan editor lainnya
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Django-related
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# ChromaDB (jika pakai persist_directory)
+**/chroma_data/
+*.parquet
+*.duckdb
+
+# Model files
+models/
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.joblib
+*.h5
+
+# Jupyter Notebooks (opsional)
+.ipynb_checkpoints/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs or outputs
+logs/
+*.log
+
+# Docker or CI (opsional)
+*.pid
+docker-compose.override.yml
