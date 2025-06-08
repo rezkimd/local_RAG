@@ -1,0 +1,238 @@
+:root {
+  --primary-color: #4361ee;
+  --primary-gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+  --secondary-color: #f72585;
+  --success-color: #4cc9f0;
+  --danger-color: #f72585;
+  --dark-color: #14213d;
+  --light-grey: #f8f9fa;
+  --medium-grey: #e9ecef;
+  --text-color: #495057;
+  --text-light: #adb5bd;
+  --border-radius: 12px;
+  --shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-grey);
+  display: flex;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 280px;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 30px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+  padding-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.sidebar h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Agar menu bisa memenuhi sisa ruang */
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 12px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Main Content Styling */
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto; /* Untuk simulasi scroll jika kontennya panjang */
+}
+
+.header {
+  background-color: white;
+  padding: 25px 40px;
+  margin-bottom: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+  border-left: 5px solid var(--primary-color);
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--dark-color);
+}
+
+/* Profile Section */
+.profile-section {
+  background-color: white;
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+.profile-section:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid var(--primary-color);
+}
+
+.profile-section h3 {
+  margin: 10px 0 5px;
+  color: var(--dark-color);
+}
+
+.profile-section p {
+  margin: 5px 0;
+  color: var(--text-color);
+}
+
+/* Exam List Section */
+.exam-list-section {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* 2 kolom adaptif */
+  gap: 25px;
+}
+
+.exam-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 5px solid var(--primary-color);
+  transition: var(--transition);
+  border: 1px solid var(--medium-grey);
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.exam-card.completed {
+  border-left: 5px solid #28a745; /* Hijau tua untuk ujian selesai */
+}
+
+.exam-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--dark-color);
+  font-size: 1.2em;
+}
+
+.exam-card p {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+.exam-card .details {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.exam-card .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto; /* Dorong tombol ke bawah */
+}
+
+.exam-card button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  flex-grow: 1;
+  letter-spacing: 0.5px;
+}
+
+.exam-card .btn-mulai {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+}
+
+.exam-card .btn-mulai:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+}
+
+.exam-card .btn-hasil {
+  background-color: var(--success-color);
+  color: white;
+  box-shadow: 0 4px 6px rgba(76, 201, 240, 0.2);
+}
+
+.exam-card .btn-hasil:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 201, 240, 0.3);
+}
+
+/* Utility classes for display toggle (simulasi) */
+.hidden {
+  display: none !important;
+}

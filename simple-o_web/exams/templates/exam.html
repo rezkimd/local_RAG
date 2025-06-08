@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ujian Esai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static '/exam.css' %}" />
+  </head>
+  <body>
+    <div class="exam-container">
+      <div class="exam-header">
+        <h1>Ujian Sejarah Kemerdekaan</h1>
+        <div class="timer">
+          Waktu Tersisa: <span id="countdown-timer">00:30:00</span>
+        </div>
+      </div>
+
+      <div class="exam-main">
+        <div class="exam-sidebar">
+          <h3>Daftar Soal</h3>
+          <ul id="question-list">
+            <li class="question-item active" data-question="1">1</li>
+            <li class="question-item" data-question="2">2</li>
+            <li class="question-item" data-question="3">3</li>
+            <li class="question-item" data-question="4">4</li>
+            <li class="question-item" data-question="5">5</li>
+            <li class="question-item" data-question="6">6</li>
+            <li class="question-item" data-question="7">7</li>
+          </ul>
+        </div>
+
+        <div class="question-area">
+          <div class="question-content">
+            <h2>
+              Soal Esai <span id="current-question-number">1</span> dari
+              <span id="total-questions">7</span>
+            </h2>
+            <p id="question-text">
+              Jelaskan secara singkat bagaimana peran Proklamasi Kemerdekaan
+              Indonesia pada tanggal 17 Agustus 1945 dalam pembentukan identitas
+              nasional.
+            </p>
+            <div class="answer-section">
+              <label for="answer-input">Jawaban Anda:</label>
+              <textarea
+                id="answer-input"
+                rows="10"
+                placeholder="Ketik jawaban Anda di sini..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="question-navigation">
+            <button id="prev-button" class="btn-nav" disabled>
+              Sebelumnya
+            </button>
+            <button id="next-button" class="btn-nav">Selanjutnya</button>
+            <button id="finish-button" class="btn-finish hidden">
+              Selesai Ujian
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'exam.js' %}"></script>
+  </body>
+</html>

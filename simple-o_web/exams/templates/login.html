@@ -1,0 +1,111 @@
+{% load static %} {# Pastikan ini ada di bagian paling atas #}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halaman Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static '/login.css' %}" />
+    {# Path CSS Anda #}
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div
+        class="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient"
+      ></div>
+
+      <div class="p-8">
+        <div class="flex flex-col items-center mb-8">
+          <div
+            class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-4"
+          >
+            <i class="fas fa-lock text-indigo-500 text-2xl"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-gray-800">
+            Selamat Datang Kembali
+          </h1>
+          <p class="text-gray-600 mt-2">
+            Silakan masukkan kredensial Anda untuk masuk
+          </p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+          {% csrf_token %} {# DITAMBAHKAN: Token CSRF untuk keamanan Django #}
+          <div>
+            <label
+              for="username"
+              {#
+              id
+              label
+              diubah
+              ke
+              username
+              #}
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Username</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <i class="fas fa-user text-gray-400"></i>
+              </div>
+              <input type="text" {# UBAH TYPE KE TEXT #} id="username" {#
+              DITAMBAHKAN/DIPERBAIKI: Atribut id="username" #} name="username"
+              {# UBAH NAME KE USERNAME #} required placeholder="username_anda"
+              {# UBAH PLACEHOLDER #} class="input-field pl-10 pr-3 py-3 w-full
+              border-b border-gray-300 focus:outline-none focus:ring-0" />
+              <div class="input-highlight"></div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Kata Sandi</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+              >
+                <i class="fas fa-lock text-gray-400"></i>
+              </div>
+              <input type="password" id="password" {# DITAMBAHKAN/DIPERBAIKI:
+              Atribut id="password" #} name="password" required
+              placeholder="••••••••" class="input-field pl-10 pr-10 py-3 w-full
+              border-b border-gray-300 focus:outline-none focus:ring-0" />
+              <div class="input-highlight"></div>
+              <div
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center toggle-password"
+                onclick="togglePasswordVisibility()"
+              >
+                <i class="fas fa-eye-slash text-gray-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
+          >
+            Masuk
+          </button>
+        </form>
+      </div>
+
+      <div
+        class="h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient"
+      ></div>
+    </div>
+
+    <script src="{% static 'login.js' %}"></script>
+    {# Path JS Anda #}
+  </body>
+</html>

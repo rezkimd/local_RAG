@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Ujian Siswa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    {# Perbarui path CSS Anda sesuai lokasi file #}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Dashboard Siswa</h2>
+      <ul>
+        <li><a href="#" id="profile-link" class="active">Profil Siswa</a></li>
+        <li><a href="#" id="exams-link">Daftar Exam</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="header">
+        <h1 id="content-title">Profil Siswa</h1>
+      </div>
+
+      <div id="profile-content" class="profile-section">
+        <img
+          src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=FOTO"
+          alt="Foto Profil"
+        />
+        <h3>Nama Siswa: Budi Santoso</h3>
+        <p>Nomor Induk Siswa: 123456789</p>
+      </div>
+
+      <div id="exams-content" class="exam-list-section hidden">
+        <div class="exam-card">
+          <div class="details">
+            <h3>Ujian Matematika Semester Genap</h3>
+            <p><strong>Tanggal:</strong> 15 Juni 2025</p>
+            <p><strong>Mata Pelajaran:</strong> Matematika</p>
+            <p><strong>Durasi:</strong> 90 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-mulai">Mulai Ujian</button>
+          </div>
+        </div>
+
+        <div class="exam-card completed">
+          <div class="details">
+            <h3>Ujian IPA Bab 3</h3>
+            <p><strong>Tanggal:</strong> 20 Mei 2025</p>
+            <p><strong>Mata Pelajaran:</strong> IPA</p>
+            <p><strong>Durasi:</strong> 60 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-hasil">Lihat Hasil</button>
+          </div>
+        </div>
+
+        <div class="exam-card">
+          <div class="details">
+            <h3>Ujian Bahasa Inggris Lisan</h3>
+            <p><strong>Tanggal:</strong> 22 Juni 2025</p>
+            <p><strong>Mata Pelajaran:</strong> Bahasa Inggris</p>
+            <p><strong>Durasi:</strong> 45 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-mulai">Mulai Ujian</button>
+          </div>
+        </div>
+        <div class="exam-card completed">
+          <div class="details">
+            <h3>Ujian Sejarah Kemerdekaan</h3>
+            <p><strong>Tanggal:</strong> 10 Mei 2025</p>
+            <p><strong>Mata Pelajaran:</strong> Sejarah</p>
+            <p><strong>Durasi:</strong> 75 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-hasil">Lihat Hasil</button>
+          </div>
+        </div>
+        <div class="exam-card">
+          <div class="details">
+            <h3>Ujian Fisika Gaya & Gerak</h3>
+            <p><strong>Tanggal:</strong> 01 Juli 2025</p>
+            <p><strong>Mata Pelajaran:</strong> Fisika</p>
+            <p><strong>Durasi:</strong> 90 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-mulai">Mulai Ujian</button>
+          </div>
+        </div>
+        <div class="exam-card completed">
+          <div class="details">
+            <h3>Ujian Kimia Reaksi Oksidasi</h3>
+            <p><strong>Tanggal:</strong> 05 April 2025</p>
+            <p><strong>Mata Pelajaran:</strong> Kimia</p>
+            <p><strong>Durasi:</strong> 60 menit</p>
+          </div>
+          <div class="actions">
+            <button class="btn-hasil">Lihat Hasil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Tautkan ke file JavaScript terpisah #}
+    <script src="{% static 'dashboard.js' %}"></script>
+  </body>
+</html>

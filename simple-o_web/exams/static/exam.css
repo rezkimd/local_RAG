@@ -1,0 +1,233 @@
+:root {
+  --primary-color: #4361ee;
+  --primary-gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+  --secondary-color: #f72585;
+  --success-color: #28a745; /* Green for completed/success */
+  --danger-color: #dc3545; /* Red for alerts */
+  --dark-color: #14213d;
+  --light-grey: #f8f9fa;
+  --medium-grey: #e9ecef;
+  --text-color: #495057;
+  --text-light: #adb5bd;
+  --border-radius: 12px;
+  --shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-grey);
+  display: flex;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+.exam-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.exam-header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+.exam-header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.timer {
+  font-size: 1.5em;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+}
+
+.exam-main {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden; /* Untuk memastikan sidebar dan konten tidak meluap */
+}
+
+.exam-sidebar {
+  width: 250px;
+  background-color: #f0f2f5; /* Lighter grey */
+  padding: 30px 20px;
+  border-right: 1px solid var(--medium-grey);
+  overflow-y: auto; /* Jika soal terlalu banyak */
+}
+
+.exam-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--dark-color);
+  text-align: center;
+}
+
+.exam-sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(60px, 1fr)
+  ); /* Kolom otomatis untuk nomor soal */
+  gap: 10px;
+}
+
+.question-item {
+  background-color: white;
+  border: 1px solid var(--medium-grey);
+  border-radius: var(--border-radius);
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.question-item:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.question-item.active {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow);
+}
+
+.question-item.answered {
+  background-color: var(--success-color); /* Hijau untuk soal yang dijawab */
+  color: white;
+  border-color: var(--success-color);
+}
+.question-item.answered.active {
+  background: linear-gradient(
+    135deg,
+    var(--success-color) 0%,
+    #1e7e34 100%
+  ); /* Gradien hijau jika aktif dan dijawab */
+  border-color: #1e7e34;
+}
+
+.question-area {
+  flex-grow: 1;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.question-content h2 {
+  margin-top: 0;
+  color: var(--dark-color);
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--medium-grey);
+  padding-bottom: 15px;
+}
+
+.question-content p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.answer-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--dark-color);
+}
+
+.answer-section textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--medium-grey);
+  border-radius: var(--border-radius);
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  resize: vertical; /* Memungkinkan textarea diubah ukurannya secara vertikal */
+  min-height: 150px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.answer-section textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.question-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--medium-grey);
+}
+
+.btn-nav,
+.btn-finish {
+  padding: 12px 25px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.btn-nav {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.btn-nav:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-nav:disabled {
+  background-color: var(--medium-grey);
+  color: var(--text-light);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-finish {
+  background-color: var(--danger-color);
+  color: white;
+  margin-left: auto; /* Dorong tombol Selesai ke kanan */
+}
+
+.btn-finish:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.hidden {
+  display: none !important;
+}

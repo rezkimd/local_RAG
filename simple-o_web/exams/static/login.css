@@ -1,0 +1,44 @@
+/* CSS Kustom untuk Animasi dan Sorotan Input */
+.animate-gradient {
+  background-size: 300%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.input-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #8b5cf6
+  ); /* Warna sesuai Tailwind: indigo-500, purple-500 */
+  transition: width 0.3s ease;
+}
+
+.input-field:focus + .input-highlight {
+  width: 100%;
+}
+
+.toggle-password {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-password:hover {
+  opacity: 0.8;
+}
