@@ -1,0 +1,79 @@
+{# simple_o_web/exams/templates/create_exam_step3.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"Buat Ujian Baru - Tahap 3" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {# Sertakan CSS umum untuk wizard forms #}
+    <link rel="stylesheet" href="{% static 'create_exam_wizard.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>{{ page_title|default:"Buat Ujian Baru" }}</h1>
+
+        <div class="form-steps">
+            <div class="form-step-indicator {% if current_step == 1 %}active{% elif current_step > 1 %}completed{% endif %}">Tahap 1: Detail Ujian</div>
+            <div class="form-step-indicator {% if current_step == 2 %}active{% elif current_step > 2 %}completed{% endif %}">Tahap 2: Soal Ujian</div>
+            <div class="form-step-indicator {% if current_step == 3 %}active{% endif %}">Tahap 3: Konfirmasi</div>
+        </div>
+
+        {% if global_errors %}
+            <ul class="global-errorlist">
+                {% for error in global_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data"> {# enctype penting untuk upload file #}
+            {% csrf_token %}
+            <input type="hidden" name="current_step_input" value="3">
+
+            <div id="step-3-content" class="step-content">
+                <h2>Tahap 3: Dokumen Referensi & Konfirmasi</h2>
+                <p>Silakan periksa kembali detail ujian dan soal-soal Anda, serta unggah dokumen referensi.</p>
+
+                {# Form untuk upload dokumen referensi #}
+                {{ form_reference.as_p }}
+
+                <h3>Detail Ujian:</h3>
+                <ul>
+                    <li><strong>Judul:</strong> {{ exam_creation_data.step1.title }}</li>
+                    <li><strong>Mata Pelajaran:</strong> {{ exam_creation_data.step1.subject }}</li>
+                    <li><strong>Durasi:</strong> {{ exam_creation_data.step1.duration_minutes }} menit</li>
+                    <li><strong>Mulai:</strong> {{ exam_creation_data.step1.start_time }}</li>
+                    <li><strong>Berakhir:</strong> {{ exam_creation_data.step1.end_time }}</li>
+                    <li><strong>Aktif:</strong> {% if exam_creation_data.step1.is_active %}Ya{% else %}Tidak{% endif %}</li>
+                    <li><strong>Jumlah Soal:</strong> {{ exam_creation_data.step1.total_essay_questions }}</li>
+                </ul>
+                <h3>Daftar Soal:</h3>
+                <ol id="confirm-questions-list">
+                    {% if exam_creation_data.step2_questions %}
+                        {% for question_data in exam_creation_data.step2_questions %}
+                            <li>Soal {{ question_data.question_number }}: "{{ question_data.question_text|truncatechars:50 }}" (Kunci: "{{ question_data.answer_text|truncatechars:30 }}", Poin: {{ question_data.max_points }})</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Belum ada soal ditambahkan.</li>
+                    {% endif %}
+                </ol>
+
+                <p style="text-align: center; font-weight: bold; color: #dc3545;">
+                    Pastikan semua informasi sudah benar sebelum menyelesaikan.
+                </p>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="previous_button" class="previous-btn">Sebelumnya</button>
+                <button type="submit" name="finish_button" class="finish-btn">Selesai Ujian</button>
+            </div>
+        </form>
+    </div>
+    {# JS spesifik tahap 3 jika ada #}
+    <script src="{% static 'create_exam_wizard.js' %}"></script>
+</body>
+</html>

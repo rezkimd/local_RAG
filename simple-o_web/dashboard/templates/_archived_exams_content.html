@@ -1,0 +1,29 @@
+{# simple_o_web/dashboard/templates/_archived_exams_content.html #}
+<div id="archived-exams-area">
+    <div class="header">
+        <h1>Arsip Ujian</h1>
+    </div>
+    <div id="archived-exams-content" class="exam-list-section">
+        {% if archived_exams %}
+            {% for exam in archived_exams %}
+            <div class="exam-card completed"> {# Gunakan kelas completed untuk tampilan arsip #}
+                <div class="details">
+                    <h3>{{ exam.title }}</h3>
+                    <p><strong>Mata Pelajaran:</strong> {{ exam.subject }}</p>
+                    <p><strong>Durasi:</strong> {{ exam.duration_minutes }} menit</p>
+                    <p><strong>Status:</strong> {% if exam.is_active %}Aktif (Tapi Selesai){% else %}Tidak Aktif{% endif %}</p>
+                    <p><strong>Selesai pada:</strong> {{ exam.end_time|date:"d M Y H:i" }}</p>
+                </div>
+                <div class="actions">
+                    {# Tombol ini mungkin akan mengarah ke halaman hasil ujian siswa atau detail ujian guru #}
+                    <button class="btn-hasil" data-exam-id="{{ exam.id }}">Lihat Detail / Hasil</button>
+                </div>
+            </div>
+            {% empty %}
+            <p>Belum ada ujian yang diarsipkan.</p>
+            {% endfor %}
+        {% else %}
+            <p>Belum ada ujian yang diarsipkan.</p>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,34 @@
+{# dashboard/templates/_available_exams_content.html #}
+<div id="available-exams-area"> {# Kontainer baru untuk seluruh area daftar ujian siswa #}
+    <div class="header"> {# Header spesifik untuk daftar ujian #}
+        <h1>Daftar Ujian</h1>
+    </div>
+    <div id="available-exams-content" class="exam-list-section">
+        {% if student_available_exams %}
+            {% for exam in student_available_exams %}
+            <div class="exam-card {% if exam.end_time < now %}completed{% endif %}">
+                <div class="details">
+                    <h3>{{ exam.title }}</h3>
+                    <p><strong>Tanggal:</strong> {{ exam.start_time|date:"d M Y H:i" }}</p>
+                    <p><strong>Mata Pelajaran:</strong> {{ exam.subject }}</p>
+                    <p><strong>Durasi:</strong> {{ exam.duration_minutes }} menit</p>
+                    <p><strong>Dibuat Oleh:</strong> {{ exam.creator.username }}</p>
+                </div>
+                <div class="actions">
+                    {% if exam.start_time > now %}
+                        <button class="btn-mulai" disabled>Belum Dimulai</button>
+                    {% elif exam.end_time < now %}
+                        <button class="btn-hasil" data-exam-id="{{ exam.id }}">Lihat Hasil</button>
+                    {% else %}
+                        <button class="btn-mulai" data-exam-id="{{ exam.id }}" onclick="window.location.href='{% url 'exams:take_exam' exam.id %}'">Mulai Ujian</button>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>Belum ada ujian yang tersedia untuk Anda.</p>
+            {% endfor %}
+        {% else %}
+            <p>Belum ada ujian yang tersedia untuk Anda.</p>
+        {% endif %}
+    </div>
+</div>

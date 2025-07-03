@@ -1,0 +1,24 @@
+{# dashboard/templates/_profile_content.html #}
+<div id="profile-area"> {# Kontainer baru untuk seluruh area profil #}
+    <div class="header"> {# Header spesifik untuk profil #}
+        <h1>
+            {% if user_role == 'teacher' %}
+                Profil Guru
+            {% elif user_role == 'admin' %}
+                Profil Admin
+            {% else %}
+                Profil Siswa
+            {% endif %}
+        </h1>
+    </div>
+    <div id="profile-content" class="profile-section">
+        <img
+          src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=FOTO"
+          alt="Foto Profil"
+        />
+        <h3>Nama: {{ profile_data.first_name }} {{ profile_data.last_name }}</h3>
+        <p>Username: {{ profile_data.username }}</p>
+        <p>Email: {{ profile_data.email }}</p>
+        <p>Role: {{ profile_data.role|capfirst }}</p>
+    </div>
+</div>

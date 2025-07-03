@@ -1,0 +1,90 @@
+{# simple_o_web/exams/templates/create_exam_step2.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"Buat Ujian Baru - Tahap 2" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {# Sertakan CSS umum untuk wizard forms #}
+    <link rel="stylesheet" href="{% static 'create_exam_wizard.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>{{ page_title|default:"Buat Ujian Baru" }}</h1>
+
+        <div class="form-steps">
+            <div class="form-step-indicator {% if current_step == 1 %}active{% elif current_step > 1 %}completed{% endif %}">Tahap 1: Detail Ujian</div>
+            <div class="form-step-indicator {% if current_step == 2 %}active{% elif current_step > 2 %}completed{% endif %}">Tahap 2: Soal Ujian</div>
+            <div class="form-step-indicator {% if current_step == 3 %}active{% endif %}">Tahap 3: Konfirmasi</div>
+        </div>
+
+        {% if global_errors %}
+            <ul class="global-errorlist">
+                {% for error in global_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="current_step_input" value="2">
+            <div id="step-2-content" class="step-content">
+                <h2>Tahap 2: Menambahkan Soal Ujian</h2>
+                <div class="question-formset-container">
+                    <div class="question-nav-sidebar">
+                        <h3>Soal</h3>
+                        <ul id="question-nav-list">
+                            {# Daftar nomor soal akan di-generate oleh JS #}
+                        </ul>
+                    </div>
+                    <div class="question-form-content">
+                        {{ formset.management_form }} {# Penting untuk formset #}
+                        <div id="questions-container">
+                    {% for form in formset %}
+                    <div class="question-form-item" id="question-form-{{ forloop.counter0 }}">
+                    {# Render field satu per satu agar bisa kontrol penempatannya #}
+                    {# Nomor soal sudah read-only dari forms.py #}
+                    <p>
+                        {{ form.question_number.label_tag }} 
+                        {{ form.question_number }} {# Ini akan render input dengan value dan readonly dari backend #}
+                    </p>
+                    <p>{{ form.question_text.label_tag }} {{ form.question_text }}</p>
+                    <p>{{ form.answer_text.label_tag }} {{ form.answer_text }}</p>
+                    <p>{{ form.max_points.label_tag }} {{ form.max_points }}</p>
+
+                    {# Input hidden untuk id, exam, is_locked, DELETE #}
+                    {# Django form akan secara otomatis merender HiddenInput jika diatur di forms.py #}
+                    {{ form.id }}
+                    {{ form.exam }}
+                    {{ form.is_locked }} 
+                    {{ form.DELETE }} 
+
+                    <div class="question-action-buttons">
+                        <button type="button" class="lock-btn" data-form-index="{{ forloop.counter0 }}">
+                            {% if form.instance.pk and form.instance.is_locked %}Buka Kunci{% else %}Kunci Soal{% endif %}
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+                {# --- EMPTY FORM TEMPLATE Dihapus karena kita tidak lagi menambah soal dinamis --- #}
+                {# Hapus template id="empty-question-form-template" #}
+                </div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" name="previous_button" class="previous-btn">Sebelumnya</button>
+                    <button type="submit" name="next_button" class="next-btn" id="next-finish-btn">Selanjutnya</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {# JS spesifik tahap 2 #}
+    <script src="{% static 'create_exam_wizard.js' %}"></script>
+</body>
+</html>

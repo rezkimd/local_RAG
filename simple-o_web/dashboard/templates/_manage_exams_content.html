@@ -1,0 +1,29 @@
+{# dashboard/templates/_manage_exams_content.html #}
+<div id="manage-exams-teacher-area"> {# Kontainer baru untuk seluruh area kelola ujian #}
+    <div class="header"> {# Header spesifik untuk kelola ujian #}
+        <h1>Kelola Ujian</h1>
+        <button id="add-exam-button" class="btn-primary-gradient">
+            Tambahkan Ujian Baru
+        </button>
+    </div>
+    <div id="manage-exams-content" class="exam-list-section">
+        {% if teacher_managed_exams %}
+            {% for exam in teacher_managed_exams %}
+            <div class="exam-card">
+                <div class="details">
+                    <h3>{{ exam.title }}</h3>
+                    <p>Mata Pelajaran: {{ exam.subject }}</p>
+                    <p>Durasi: {{ exam.duration_minutes }} menit</p>
+                    <p>Status: {% if exam.is_active %}Aktif{% else %}Tidak Aktif{% endif %}</p>
+                </div>
+                <div class="actions">
+                    <button class="btn-hasil" data-exam-id="{{ exam.id }}">Edit Ujian</button>
+                    <button class="btn-danger" data-exam-id="{{ exam.id }}">Hapus</button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Anda belum membuat ujian.</p>
+        {% endif %}
+    </div>
+</div>

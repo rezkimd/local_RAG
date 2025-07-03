@@ -1,0 +1,51 @@
+{# simple_o_web/exams/templates/create_exam_step1.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"Buat Ujian Baru - Tahap 1" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {# Sertakan CSS umum untuk wizard forms #}
+    <link rel="stylesheet" href="{% static 'create_exam_wizard.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>{{ page_title|default:"Buat Ujian Baru" }}</h1>
+
+        <div class="form-steps">
+            <div class="form-step-indicator {% if current_step == 1 %}active{% elif current_step > 1 %}completed{% endif %}">Tahap 1: Detail Ujian</div>
+            <div class="form-step-indicator {% if current_step == 2 %}active{% elif current_step > 2 %}completed{% endif %}">Tahap 2: Soal Ujian</div>
+            <div class="form-step-indicator {% if current_step == 3 %}active{% endif %}">Tahap 3: Konfirmasi</div>
+        </div>
+
+        {% if global_errors %}
+            <ul class="global-errorlist">
+                {% for error in global_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="current_step_input" value="1">
+
+            <div id="step-1-content" class="step-content">
+                <h2>Tahap 1: Mendaftarkan Ujian</h2>
+                {{ form.as_p }}
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="cancel_button" class="cancel-btn">Batalkan</button>
+                <button type="submit" name="next_button" class="next-btn">Selanjutnya</button>
+            </div>
+        </form>
+    </div>
+    {# JS spesifik tahap 1 jika ada #}
+    <script src="{% static 'create_exam_wizard.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{# simple_o_web/exams/templates/exam_completed.html (ini adalah nama file yang saya berikan sebelumnya, jadi kita akan gunakan ini) #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Selesai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {# --- TAUKAN KE FILE CSS EKSTERNAL --- #}
+    <link rel="stylesheet" href="{% static 'exam.css' %}">
+</head>
+<body class="completed">
+    <div class="container">
+        <h1>Ujian Selesai!</h1>
+        <p>{{ message }}</p>
+        <p><a href="{% url 'dashboard:home' %}">Kembali ke Dashboard</a></p>
+    </div>
+</body>
+</html>
