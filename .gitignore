@@ -181,6 +181,7 @@ ENV/
 *.env
 *.venv
 .venv/
+.ragvenv/
 
 # VSCode, PyCharm, dan editor lainnya
 .vscode/
